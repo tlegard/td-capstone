@@ -38,26 +38,7 @@ export default class TrendingContainer extends Component {
     }
 
     componentDidMount() {
-        // axios.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
-        //     .then(response => {
-        //         this.setState({
-        //             giphys: response.data.data
-        //         });
-        //     })
-        //     .catch(error => {
-        //         console.log('Error fetching and parsing data', error);
-        //     });
-
-        // refactor above request to use async await, hitting Twitter API as well
-        async function apiCall() {
-            try {
-                await Promise.all([this.getGifs(), this.getHashtags()]);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        apiCall();
+        Promise.all([this.getGifs(), this.getHashtags()]);
     }
 
     getTotalHashtags = () => this.state.hashtags.length;
