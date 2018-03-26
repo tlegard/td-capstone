@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import TrendingList from './TrendingList';
+import User from '../models/user';
 
 export default class TrendingContainer extends Component {
 
     constructor() {
         super();
+
         this.state = {
             hashtags: [],
-            giphys: []
-        }
+            giphys: [],
+            isAuthenticated: false,
+            user: null,
+            token: ''
+        };
     }
 
     getGifs = () => {
