@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import TrendingList from './TrendingList';
-import User from '../models/user';
+import User from '../models/User';
 
 export default class TrendingContainer extends Component {
 
