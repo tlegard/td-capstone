@@ -2,21 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import TrendingList from './TrendingList';
-import User from '../models/User';
 
 export default class TrendingContainer extends Component {
-
-    constructor() {
-        super();
-
-        this.state = {
-            hashtags: [],
-            giphys: [],
-            isAuthenticated: false,
-            user: null,
-            token: ''
-        };
-    }
 
     getGifs = () => {
         return axios.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
