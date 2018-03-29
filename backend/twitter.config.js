@@ -1,4 +1,4 @@
 module.exports = {
     consumerKey: 'KEY',
-    consumerSecret: 'SECRET'
+    consumerSecret: 'SECRET' //testing
 };
