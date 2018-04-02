@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import TrendingList from './TrendingList';
 
@@ -38,11 +39,15 @@ export default class TrendingContainer extends Component {
     getTotalGiphys = () => this.state.giphys.length;
 
     render() {
-        console.log(this.state.giphys);
         return (
             <div>
-                <TrendingList giphydata={this.state.giphys} hashtagdata={this.state.hashtags} />
+                <TrendingList />
             </div>
         )
     }
+}
+
+TrendingContainer.propTypes = {
+    hashtagdata: PropTypes.array.isRequired,
+    giphydata: PropTypes.array.isRequired
 }

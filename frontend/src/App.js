@@ -4,6 +4,7 @@ import './App.css';
 import TrendingContainer from './components/TrendingContainer';
 import TwitterLogin from 'react-twitter-auth';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class App extends Component {
 
@@ -60,11 +61,9 @@ export default class App extends Component {
         return (
             <div className="App">
                 {content}
-                <TrendingContainer />
+                <TrendingContainer giphydata={this.state.giphys} hashtagdata={this.state.hashtags} />
             </div>
         );
     };
 
 };
-
-export default App;
