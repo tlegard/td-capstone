@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
 
 module.exports = () => {
 
-    const db = mongoose.connect('mongodb://localhost:27017/twitter-demo');
+    const db = mongoose.connect('mongodb://localhost:27017/twitter-hashtags');
 
     const UserSchema = new Mongoose.Schema({
         email: {

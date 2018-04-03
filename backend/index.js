@@ -9,7 +9,8 @@ const mongoose = require('./mongoose'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
     request = require('request'),
-    twitterConfig = require('./twitter.config.js');
+    twitterConfig = require('./twitter.config.js'),
+    dotEnv = require('dotenv').config();
 
 mongoose();
 
