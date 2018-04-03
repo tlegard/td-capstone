@@ -41,7 +41,7 @@ export default class TrendingContainer extends Component {
     render() {
         return (
             <div>
-                <TrendingList />
+                <TrendingList hashtagdata={this.props.hashtagdata} giphydata={this.props.giphydata} />
             </div>
         )
     }
