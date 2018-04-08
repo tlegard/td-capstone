@@ -43,25 +43,25 @@ export default class App extends Component {
                 <div>
                     <header>Trending Hashtags</header>
                     <div>
-                        {this.state.email}
+                        {this.state.user.email}
                     </div>
                     <div>
                         <button onClick={this.logout} className="button">
                             Log out
                         </button>
                     </div>
+                    <TrendingContainer giphydata={this.state.giphys} hashtagdata={this.state.hashtags} />
                 </div>
             ) :
             (
-                <TwitterLogin loginUrl="http://localhost:4000/api/v1/auth/twitter"
+                <TwitterLogin loginUrl="http://localhost:8080/api/v1/auth/twitter"
                     onFailure={this.onFailed} onSuccess={this.onSuccess}
-                    requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse" />
+                    requestTokenUrl="http://localhost:8080/api/v1/auth/twitter/reverse" />
             );
 
         return (
             <div className="App">
                 {content}
-                <TrendingContainer giphydata={this.state.giphys} hashtagdata={this.state.hashtags} />
             </div>
         );
     };

@@ -12,6 +12,7 @@ export default class TrendingContainer extends Component {
                 this.setState({
                     giphys: response.data.data
                 });
+                console.log("giphy state set!");
             })
             .catch(error => {
                 console.log('Error fetching and parsing data', error);
@@ -24,6 +25,7 @@ export default class TrendingContainer extends Component {
                 this.setState({
                     hashtags: response.data.trends
                 });
+                console.log("hashtag state set!");
             })
             .catch(error => {
                 console.log('Error fetching and parsing data', error);
