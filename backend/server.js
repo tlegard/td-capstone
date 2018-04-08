@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('./mongoose'),
+var mongoose = require('./mongoose'),
     passport = require('passport'),
     express = require('express'),
     jwt = require('jsonwebtoken'),
@@ -14,8 +14,8 @@ const mongoose = require('./mongoose'),
 
 mongoose();
 
-const User = require('mongoose').model('User');
-const passportConfig = require('./passport');
+var User = require('mongoose').model('User');
+var passportConfig = require('./passport');
 
 // set up config for Twitter authentication
 passportConfig();
@@ -41,7 +41,7 @@ router.route('/health-check').get((req, res) => {
 });
 
 const createToken = (auth) => {
-    return Jwt.sign({
+    return jwt.sign({
         id: auth.id
     }, 'my-secret',
         {
@@ -82,10 +82,10 @@ router.route('/auth/twitter/reverse')
 
 // authorization
 // obtain oauth verifier
-router.route('auth/twitter')
+router.route('/auth/twitter')
     .post((req, res, next) => {
         request.post({
-            url: `https://api.twitter.com/oauth/acces_token?oauth_verifier`,
+            url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
             oauth: {
                 consumer_key: twitterConfig.consumerKey,
                 consumer_secret: twitterConfig.consumerSecret,
@@ -97,17 +97,21 @@ router.route('auth/twitter')
                 return res.send(500, { message: err.message });
             }
 
-            console.log(body);
+            console.log('TWITTER BODY:', body);
             const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
+            console.log('JSON BODY', bodyString);
             const parsedBody = JSON.parse(bodyString);
+            console.log('parsed...', parsedBody);
 
-            req.body['oauth-token'] = parsedBody.oauth_token;
-            req.body['oauth-token-secret'] = parsedBody.oauth_token_secret;
+            req.body['oauth_token'] = parsedBody.oauth_token;
+            req.body['oauth_token_secret'] = parsedBody.oauth_token_secret;
             req.body['user_id'] = parsedBody.user_id;
+
+            console.log(req.body);
 
             next();
         });
-    }, passport.authenticate('twitter-token', { session: false }), (req, res, next) => {
+    }, passport.authenticate('twitter-token', { session: false }), function(req, res, next) {
         if (!req.user) {
             return res.send(401, 'User Not Authenticated');
         }
@@ -116,6 +120,8 @@ router.route('auth/twitter')
         req.auth = {
             id: req.user.id
         };
+
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
         return next();
     }, generateToken, sendToken);
@@ -144,7 +150,7 @@ const getCurrentUser = (req, res, next) => {
     });
 };
 
-getOneUser = (req, res) => {
+const getOneUser = (req, res) => {
     let user = req.user.toObject();
 
     delete user['twitterProvider'];
@@ -158,8 +164,8 @@ router.route('/auth/me')
 
 app.use('/api/v1', router);
 
-app.listen(3000);
+app.listen(8080);
 
-console.log('Server running on port 3000!');
+console.log('Server running on port 8080!');
 
 module.exports = app;

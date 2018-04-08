@@ -1,13 +1,13 @@
 'use strict';
 
-const mongoose = require('mongoose'),
+var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-module.exports = () => {
+module.exports = function() {
 
     const db = mongoose.connect('mongodb://localhost:27017/twitter-hashtags');
 
-    const UserSchema = new Mongoose.Schema({
+    const UserSchema = new mongoose.Schema({
         email: {
             type: String, required: true,
             trim: true, unique: true,
@@ -24,7 +24,7 @@ module.exports = () => {
 
     UserSchema.set('toJSON', { getters: true, virtuals: true });
 
-    UserSchema.statics.upsertTwitterUser = (token, tokenSecret, profile, cb) => {
+    UserSchema.statics.upsertTwitterUser = function (token, tokenSecret, profile, cb) {
         return this.findOne({
             'twitterProvider.id': profile.id
         }, (err, user) => {
@@ -39,7 +39,7 @@ module.exports = () => {
                     }
                 });
 
-                newUser.save((error, savedUser) => {
+                newUser.save(function (error, savedUser) {
                     if (error) {
                         console.log(error);
                     }
