@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-module.exports = function() {
+module.exports = function () {
 
     const db = mongoose.connect('mongodb://localhost:27017/twitter-hashtags');
 

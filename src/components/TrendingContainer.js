@@ -20,7 +20,7 @@ export default class TrendingContainer extends Component {
     }
 
     getHashtags = () => {
-        return axios.get('https://api.twitter.com/1.1/trends/place.json')
+        return axios.get('https://api.twitter.com/1.1/trends/place.json?id=1')
             .then(response => {
                 this.setState({
                     hashtags: response.data.trends
